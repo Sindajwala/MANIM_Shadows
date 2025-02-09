@@ -34,3 +34,33 @@ class PartV(Scene):
         self.play(Succession(FadeIn(s7_s),FadeOut(s7_s,run_time=0.4),FadeIn(s7_ss)))
 
         self.wait()
+
+
+         text3 = Text('Adding Depth Using Z-Index').shift(UP*1)
+        s8 = Ellipse().next_to(text3,DOWN).set_z_index(7)
+        s9 = Ellipse().next_to(text3,DOWN*2).scale(0.7).set_z_index(6)
+        s10 = Ellipse().next_to(text3,DOWN*3).scale(0.3).set_z_index(5)
+        s11 = Ellipse().next_to(text3,DOWN*5).scale(0.3).set_z_index(3)
+        s12 = Ellipse().next_to(text3,DOWN*6).scale(0.7).set_z_index(2)
+        s13 = Ellipse().next_to(text3,DOWN*7).set_z_index(1)
+        plane = NumberPlane(
+            x_length=2,
+            y_length=1,
+        )
+        matrix = [[1, 1], [0, 1]]
+        plane.apply_matrix(matrix).next_to(text3,DOWN*4).set_z_index(4)
+        dshl1 = DashedLine(start=ORIGIN,end=UP*2)
+        darrow1 = Arrow(start=UP*2,end=UP*2)
+        arrow_group1 = VGroup(dshl1, darrow1)
+        dshl2 = DashedLine(start=ORIGIN,end=DOWN*2)
+        darrow2 = Arrow(start=DOWN*2,end=DOWN*2)
+        arrow_group2 = VGroup(dshl2, darrow2)
+
+        self.play(Succession(Create(text3),Circumscribe(text3)))
+        self.wait()
+        self.play(FadeIn(plane))
+        self.wait()
+        self.play(Succession(Create(VGroup(s10,s11)),Create(VGroup(s9,s12)),Create(VGroup(s8,s13))))
+        self.wait()
+        self.play(Create(arrow_group1),Create(arrow_group2))
+        self.wait(2)
