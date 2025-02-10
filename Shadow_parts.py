@@ -64,3 +64,29 @@ class PartV(Scene):
         self.wait()
         self.play(Create(arrow_group1),Create(arrow_group2))
         self.wait(2)
+
+
+        text4 = Text('Enhancing Shadows').shift(UP*1)
+        s14 = Rectangle(height=1.5,width=8,color=GREY,fill_opacity=1)
+        matrix4 = [[1, 1], [0, 1]]
+        s14.apply_matrix(matrix4).next_to(text4,DOWN*3.8)
+        s16 = Circle(color=RED,fill_opacity=1,stroke_color=BLACK).next_to(text4,DOWN*2).scale(0.7).shift(LEFT*2.5).set_z_index(10)
+        s16_s = Circle(color=BLACK, stroke_color=BLACK).scale(0.7)
+        s16_s.apply_matrix(matrix4).next_to(text4,DOWN*3).shift(LEFT*1.8)
+
+        s17 = Circle(fill_opacity=1,stroke_color=BLACK).next_to(text4,DOWN*2).scale(0.7).set_z_index(10)
+        s17_s = Circle(color=BLACK, fill_opacity=1).scale(0.7)
+        s17_s.apply_matrix(matrix4).next_to(text4,DOWN*3.1).shift(RIGHT*0.6)
+
+        s18 = Circle(fill_opacity=1,stroke_color=BLACK).next_to(text4,DOWN*2).scale(0.7).shift(RIGHT*2.5).set_z_index(10)
+        s18_s = Circle(color=BLACK,fill_opacity=0.5).scale(0.7)
+        s18_s.apply_matrix(matrix4).next_to(text4,DOWN*3).shift(RIGHT*3.2).set_stroke(opacity=0.3)
+
+
+        self.play(Succession(Create(text4),Circumscribe(text4)))
+        self.wait(2)
+        self.play(Create(s14))
+        self.play(Succession(SpinInFromNothing(s16),SpinInFromNothing(s17),SpinInFromNothing(s18)))
+        self.wait()
+        self.play(Succession(Create(s16_s),Create(s17_s),Create(s18_s)))
+        self.wait()
